@@ -35,7 +35,7 @@ def submit_risk_profile_form(request):
         selected = request.POST.getlist("q5")  # returns a list of strings: ['17', '18', '20']
         print(selected)
         option_ids = data.get('option_ids', [])
-        print('opID',option_ids)
+        
         #retrieves the list of option IDs from the request body.
         # This list represents the options selected by the user in response to the set of questions.
 

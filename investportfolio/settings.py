@@ -1,5 +1,5 @@
 """
-Django settings for investguide project (StarVest).
+Django settings for investportfolio project.
 """
 
 from pathlib import Path
@@ -35,7 +35,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'investguide.urls'
+ROOT_URLCONF = 'investportfolio.urls'
 
 TEMPLATES = [
     {
@@ -52,7 +52,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'investguide.wsgi.application'
+WSGI_APPLICATION = 'investportfolio.wsgi.application'
 
 # Database
 DATABASES = {

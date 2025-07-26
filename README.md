@@ -60,41 +60,9 @@ These fund categories each possess funds that are ranked on a 1-5 stars scale us
 
 ---
 
-##  API Endpoint
+##  API Documentation
 
-### `POST /core/risk-profile/submit`
-
-Submit selected options and receive a risk profile based on scoring logic.
-
-**Request Body:**
-
-```json
-{
-  "option_ids": [1, 4, 6, 8, 9, 10, 13, 16]
-}
-```
-
->  Make sure `option_ids` includes more than 7 responses:
->
-> * Questions 1–4, 6–7: **one option each**
-> * Question 5: **multiple options allowed**
-
-**Response:**
-
-```json
-{
-  "risk_profile": "Moderate"
-   "description": "Invest in a mix of U.S. equities and bonds, with a smaller allocation to international equities. "
-}
-```
-
-**Error Response:**
-
-```json
-{
-  "error": "You must answer at least 7 or more questions."
-}
-```
+Check out the [Full API Docs](./docs/postman/api.md)
 
 ---
 

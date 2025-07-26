@@ -1,5 +1,5 @@
 """
-ASGI config for investguide project.
+ASGI config for investportfolio project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'investguide.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'investportfolio.settings')
 
 application = get_asgi_application()
