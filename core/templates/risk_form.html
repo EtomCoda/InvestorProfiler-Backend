@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <title>Risk Profile Assessment</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+        background-color: #f9f9f9;
+      }
+      form {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 600px;
+        margin: auto;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        margin-top: 0;
+      }
+      .question {
+        margin-bottom: 20px;
+      }
+      .question p {
+        margin-bottom: 8px;
+        font-weight: bold;
+      }
+      button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      #result {
+        margin-top: 30px;
+        font-weight: bold;
+        color: green;
+      }
+
+      #riskProfileCard {
+        margin-top: 40px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #fff;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .profile-card h3 {
+        margin-top: 0;
+        color: #007bff;
+      }
+
+      .profile-card p {
+        margin: 10px 0;
+        font-size: 16px;
+      }
+
+      .fund-card {
+        margin-top: 20px;
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-left: 4px solid #007bff;
+        border-radius: 8px;
+      }
+
+      #fundList {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      #fundList li {
+        padding: 5px 0;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .fund-button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        text-align: left;
+      }
+
+      .fund-button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="riskForm" method="post">
+      {% csrf_token %}
+
+      <h2>Risk Profile Questionnaire</h2>
+
+      <div class="question">
+        <p>
+          1. When do you intend to start withdrawing money from you investments?
+        </p>
+        <label
+          ><input type="radio" name="q1" value="1" required /> Less than 3
+          years</label
+        ><br />
+        <label><input type="radio" name="q1" value="2" /> 3 - 5 years </label
+        ><br />
+        <label><input type="radio" name="q1" value="3" /> 6 - 10 years </label
+        ><br />
+        <label
+          ><input type="radio" name="q1" value="4" /> 11 years or more
+        </label>
+      </div>
+
+      <div class="question">
+        <p>
+          2. Once you start withdrawing money from your investments, when do you
+          plan to withdraw all the invested funds?
+        </p>
+        <label
+          ><input type="radio" name="q2" value="5" required /> Less than 2 years </label
+        ><br />
+        <label><input type="radio" name="q2" value="6" /> 2 - 5 years </label
+        ><br />
+        <label><input type="radio" name="q2" value="7" /> 6 - 10 years </label
+        ><br />
+        <label
+          ><input type="radio" name="q2" value="8" /> 11 years or more
+        </label>
+      </div>
+
+      <div class="question">
+        <p>3. How would you describe your knowledge of investments?</p>
+        <label><input type="radio" name="q3" value="9" required /> None</label
+        ><br />
+        <label><input type="radio" name="q3" value="10" /> Limited </label
+        ><br />
+        <label><input type="radio" name="q3" value="11" /> Good </label><br />
+        <label><input type="radio" name="q3" value="12" /> Extensive</label>
+      </div>
+
+      <div class="question">
+        <p>4. What are you most concerned about when you invest your money?</p>
+        <label
+          ><input type="radio" name="q4" value="13" required /> My investment
+          losing value</label
+        ><br />
+        <label
+          ><input type="radio" name="q4" value="14" /> Equally concerned about
+          my investment losing or gaining value</label
+        ><br />
+        <label
+          ><input type="radio" name="q4" value="15" /> My investment gaining
+          value</label
+        ><br />
+      </div>
+
+      <div class="question">
+        <p>
+          5. Which investments do you currently own? (You can choose more than
+          one )
+        </p>
+        <label
+          ><input type="checkbox" name="q5" value="16" /> Bonds and/or bond
+          funds </label
+        ><br />
+        <label
+          ><input type="checkbox" name="q5" value="17" /> Stocks and/or stock
+          funds </label
+        ><br />
+        <label
+          ><input type="checkbox" name="q5" value="18" /> International
+          securities and/or international funds </label
+        ><br />
+      </div>
+
+      <div class="question">
+        <p>
+          6. Suppose that over the past three months, the stock market lost 25%
+          of its value. A stock you invested in also lost 25% of its value. How
+          would you react?
+        </p>
+        <label
+          ><input type="radio" name="q6" value="19" required /> Sell all my
+          shares </label
+        ><br />
+        <label
+          ><input type="radio" name="q6" value="20" /> Sell some of my shares </label
+        ><br />
+        <label><input type="radio" name="q6" value="21" /> Do nothing </label
+        ><br />
+        <label
+          ><input type="radio" name="q6" value="22" /> Buy more shares
+        </label>
+      </div>
+
+      <div class="question">
+        <p>
+          7. Outlined in the chart below are the most likely best-case and
+          worst-case annual returns of five hypothetical investment plans. Which
+          range of outcomes is most acceptable to you?
+        </p>
+        {% load static %}
+        <img
+          src="{% static 'img/risk-table.png' %}"
+          alt="Risk/Return Chart"
+          style="max-width: 100%; margin-bottom: 10px"
+        />
+        <label><input type="radio" name="q7" value="23" required /> A</label
+        ><br />
+        <label><input type="radio" name="q7" value="24" /> B</label><br />
+        <label><input type="radio" name="q7" value="25" /> C</label><br />
+        <label><input type="radio" name="q7" value="26" /> D</label>
+        <br />
+        <label><input type="radio" name="q7" value="27" /> E</label>
+      </div>
+
+      <button type="submit">Submit</button>
+      <div id="result"></div>
+      <div id="profile"></div>
+      <div id="description"></div>
+    </form>
+
+    <footer style="margin-top: 40px; text-align: center">
+      <p>
+        <b>Starvest</b>
+        is a registered investment advisor. This website is for informational
+        purposes only and does not constitute an offer to sell or a solicitation
+        of an offer to buy any security or investment product. Please consult
+        with a qualified financial advisor before making any investment decisions.
+      </p>
+      <p>&copy; 2025 Starvest</p>
+    </footer>
+
+        {% comment %} Risk Profile Card {% endcomment %}
+    <div id="riskProfileCard" style="display: none">
+      <div class="profile-card">
+        <h3>Your Risk Profile</h3>
+        <p><strong>Profile Type:</strong> <span id="profileType"></span></p>
+        <p>
+          <strong>Description:</strong> <span id="profileDescription"></span>
+        </p>
+      </div>
+      {% comment %} Fund Categories {% endcomment %}
+      <div
+        id="fundButtons"
+        style="
+          margin-top: 20px;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        "
+      ></div>
+      <div
+        id="message"
+        style="margin-top: 5px; display: flex; flex-direction: column; gap: 5px"
+      ></div>
+      {% comment %} FUND DETAILS {% endcomment %}
+      <!-- Hidden fund details card -->
+      <div id="fundDetailCard" style="display: none">
+        <div class="fund-card">
+          <h4 id="fundCategoryTitle"></h4>
+          <ul id="fundList"></ul>
+          <button onclick="hideFundDetails()">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("riskForm")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault();
+
+          const form = event.target;
+          const selectedIds = [];
+
+          // Radio Questions
+          for (let i = 1; i <= 4; i++) {
+            const val = form[`q${i}`].value;
+            if (val) selectedIds.push(parseInt(val));
+          }
+
+          // Question 5 (checkbox)
+          const q5 = form.querySelectorAll("input[name='q5']:checked");
+          q5.forEach((cb) => selectedIds.push(parseInt(cb.value)));
+
+          // Remaining Radios
+          for (let i of [6, 7]) {
+            const val = form[`q${i}`].value;
+            if (val) selectedIds.push(parseInt(val));
+          }
+          console.log("selected ids from api", selectedIds);
+
+          const resultEl = document.getElementById("result");
+          const resultDE = document.getElementById("description");
+          resultEl.textContent = "Submitting...";
+
+          //SUBMISSION HANDLING
+          const response = await fetch("/core/risk-profile-form/submit/", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "X-CSRFToken": "{{ csrf_token }}",
+            },
+            body: JSON.stringify({ option_ids: selectedIds }),
+          });
+
+          console.log("response from api", response);
+
+          const data = await response.json();
+          console.log("data from api", data);
+
+          if (response.ok) {
+            resultEl.textContent = "";
+            resultDE.textContent = "";
+
+            document.getElementById("riskProfileCard").style.display = "block";
+            document.getElementById("riskForm").style.display = "none";
+            document.getElementById("profileType").textContent = data.profile;
+            document.getElementById("profileDescription").textContent =
+              data.description;
+          } else {
+            resultEl.textContent = `Error: ${data.error || data.message}`;
+            resultEl.style.color = "red";
+            resultDE.textContent = "";
+          }
+          showFundRecommendations(data.profile);
+        });
+      //Handle the fund recommendations based on the risk profile
+      //this function fetches the fund recommendations based on the risk profile and displays them in the fund buttons section
+      async function showFundRecommendations(profile) {
+        const fundButtons = document.getElementById("fundButtons");
+        fundButtons.innerHTML = "";
+        //this fetches the fund profiles from the server
+        const userFunds = await fetch(`/funds/get-fund-profile/`)
+          .then((response) => response.json())
+          .catch((error) => {
+            console.error("Error fetching fund profiles:", error);
+            return {};
+          });
+
+        const userPortfolio = userFunds[profile];
+        if (!userPortfolio) {
+          fundButtons.innerHTML = `<p>No recommendations found for profile: ${profile}</p>`;
+          return;
+        }
+
+        const profileTitle = document.createElement("h3");
+        const profileSubtitle = document.createElement("h4");
+        profileTitle.textContent = `${profile} Portfolio`;
+        profileSubtitle.textContent = ` Diversify investments as such percentages`;
+        fundButtons.appendChild(profileTitle);
+        message.appendChild(profileSubtitle);
+
+        //this creates the fundCategoryTitle buttons dynamically based on the user portfolio
+        userPortfolio.forEach((item) => {
+          const btn = document.createElement("button");
+          btn.className = "fund-button";
+          btn.textContent = `${item.category} – ${item.percent}%`;
+          btn.onclick = () => showFundDetails(item.category, item.funds);
+          fundButtons.appendChild(btn);
+        });
+      }
+
+      // this function shows the funds under each fund category when the button is clicked
+      function showFundDetails(category, funds) {
+        document.getElementById(
+          "fundCategoryTitle"
+        ).textContent = `${category}`;
+        const list = document.getElementById("fundList");
+        list.innerHTML = "";
+
+        // Sort funds by score descending
+        const sortedFunds = [...funds].sort((a, b) => {
+          const scoreA = parseFloat(a[1]) || 0;
+          const scoreB = parseFloat(b[1]) || 0;
+          return scoreB - scoreA;
+        });
+        
+
+        sortedFunds.forEach((fund) => {
+          const li = document.createElement("li");
+          // Extract fund name and score from array
+          const fundName = fund[0];
+          const score = parseFloat(fund[1]) || 0;
+
+          // Build stars for float scores (e.g., 3.5) using Font Awesome
+          let stars = "";
+          for (let i = 1; i <= 5; i++) {
+            if (score >= i) {
+              stars += '<i class="fas fa-star"></i>'; // Full star
+            } else if (score >= i - 0.5) {
+              stars += '<i class="fas fa-star-half-alt"></i>'; // Half star
+            } else {
+              stars += '<i class="far fa-star"></i>'; // Empty star
+            }
+          }
+
+          li.textContent = `${fundName} `;
+          const starSpan = document.createElement("span");
+          starSpan.style.color = "#FFD700";
+          starSpan.style.fontSize = "1.2em";
+          starSpan.innerHTML = stars; // Use innerHTML for Font Awesome icons
+          li.appendChild(starSpan);
+          list.appendChild(li);
+        });
+
+        document.getElementById("fundDetailCard").style.display = "block";
+      }
+
+      // Hide fund details card
+      function hideFundDetails() {
+        document.getElementById("fundDetailCard").style.display = "none";
+      }
+    </script>
+  </body>
+</html>
