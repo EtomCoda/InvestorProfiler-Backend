@@ -108,25 +108,11 @@ Open [`risk_form.html`](./risk_form.html) in a browser to test the form submissi
 
 ---
 
-##  How Risk Is Calculated
-
-* **Time Score:** Sum of scores from Question 1 and 2
-* **Tolerance Score:** Sum of scores from Questions 3–7
-* Scores are matched against the `ProfileMapping` model to determine the profile
-
----
-
-##  Models Overview
-
-* `Option`: Contains each answer's score and linked `Question`
-* `ProfileMapping`: Maps ranges of `time_score` and `tolerance_score` to a risk profile
-
----
 
 
 ##  License
 
-MIT License © 2025 EtomCoda
+Unlicenced © 2025 EtomCoda
 
 ---
 
