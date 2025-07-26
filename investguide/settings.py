@@ -4,15 +4,14 @@ Django settings for investguide project (StarVest).
 
 from pathlib import Path
 import os
-import dj_database_url
 
 # Build paths
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Security
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-+(j5fb7-z@zn*b_=n#=ngh4fw42*8=f90x2-y(%q20ydy=y70)')
-DEBUG = os.getenv('DEBUG', 'False') == 'True'
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', 'starvest.onrender.com,localhost,127.0.0.1').split(',')
+SECRET_KEY = 'django-insecure-+(j5fb7-z@zn*b_=n#=ngh4fw42*8=f90x2-y(%q20ydy=y70)'
+DEBUG = True
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 # Application definition
 INSTALLED_APPS = [
@@ -28,7 +27,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -58,12 +56,10 @@ WSGI_APPLICATION = 'investguide.wsgi.application'
 
 # Database
 DATABASES = {
-    'default': dj_database_url.config(
-       default='sqlite:///' + str(BASE_DIR / 'db.sqlite3'),
-        conn_max_age=600,
-        conn_health_checks=True,
-        ssl_require=os.getenv('DJANGO_ENV') == 'production'
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 # Password validation
@@ -83,7 +79,6 @@ USE_TZ = True
 # Static files
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATICFILES_DIRS = [
     BASE_DIR / 'core/static',
     BASE_DIR / 'funds/static',
