@@ -85,6 +85,46 @@ The `funds` application manages the investment funds and their categories. Each 
 ##  API Documentation
 
 Check out the [Full API Docs](./docs/postman/api.md)
+
+---
+
+## Testing
+
+This project includes a suite of tests to ensure the reliability of the `core` and `funds` applications.
+
+### Core Application Tests
+
+The tests for the `core` application are located in the `core/test/` directory and cover the following areas:
+
+- **`test_core_utils.py`**: This module tests the business logic of the risk profiling system. It ensures that the `calculate_risk_profile` function behaves as expected in various scenarios, including:
+  - Successful risk profile calculation.
+  - Handling of `ValueError` when a question is missed.
+  - Detection of a `ShortTimeHorizonError` for users with a short investment timeline.
+  - Graceful failure when no risk profile matches the user's scores.
+
+- **`test_core_views.py`**: This module tests the API endpoints of the `core` application. It verifies that the views handle requests correctly, including:
+  - Successful submission of the risk profile form.
+  - Proper handling of invalid HTTP methods.
+  - Validation of request data to ensure all questions are answered.
+  - Correct error responses for short time horizons or when no matching profile is found.
+
+- **`test_profile_matching.py`**: This module validates the accuracy of the `ProfileMapping` model. It confirms that the predefined score ranges correctly map to the appropriate risk profiles, ensuring that users are assigned the correct investment profile based on their scores.
+
+### Funds Application Tests
+
+The tests for the `funds` application are located in the `funds/tests/` directory. These tests ensure the proper functioning of the fund management system, including:
+
+- **`tests.py`**: This module covers the following functionalities:
+  - **Model Creation**: Verifies that `Fund` and `FundCategory` objects are created correctly.
+  - **Relationships**: Ensures that the relationship between funds and their categories is correctly established.
+  - **API Endpoint**: Tests the `get_fund_profile` view to confirm that it returns the correct fund profiles and handles various scenarios, such as invalid request methods or cases where no data is available.
+
+To run the tests, you can use the following command:
+
+```bash
+python manage.py test
+```
+
 ---
 
 ## Testing via Frontend Form
